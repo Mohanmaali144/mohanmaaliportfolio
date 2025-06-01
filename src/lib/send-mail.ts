@@ -30,7 +30,7 @@ export async function sendMail({
 
         let info = await transporter.sendMail({
             from: `"Sohan PortFolio" <${process.env.MAIL_USER}>`,
-            to: sendTo,
+            to: process.env.ADMIN_EMAIL_GET,,
             subject: subject,
             text: `Hello ${variables.name}, Welcome to our platform!`,
             html: html,
