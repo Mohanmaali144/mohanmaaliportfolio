@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-badge-glow {
+    animation: badge-glow 2s infinite alternate;
+  }
+  @keyframes badge-glow {
+    0% { box-shadow: 0 0 8px 2px rgba(139,92,246,0.18); }
+    100% { box-shadow: 0 0 24px 6px rgba(139,92,246,0.32); }
+  }
+  .animate-avatar-glow {
+    animation: avatar-glow 2.5s infinite alternate;
+  }
+  @keyframes avatar-glow {
+    0% { box-shadow: 0 0 0 6px rgba(99,102,241,0.13), 0 6px 24px 0 rgba(99,102,241,0.14); }
+    100% { box-shadow: 0 0 0 14px rgba(139,92,246,0.22), 0 10px 36px 0 rgba(99,102,241,0.22); }
+  }
+}
+
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background-light text-text-light transition-colors duration-300 ease-in-out dark:bg-background-dark dark:text-text-dark;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 md:px-6 lg:px-8;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-light text-white hover:bg-primary-dark dark:bg-primary-dark dark:hover:bg-primary-light;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-light text-white hover:bg-secondary-dark dark:bg-secondary-dark dark:hover:bg-secondary-light;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary-light text-primary-light hover:bg-primary-light hover:text-white dark:border-primary-dark dark:text-primary-dark dark:hover:bg-primary-dark;
+  }
+  
+  /* Navigation link styles */
+  .nav-link {
+    @apply relative overflow-hidden inline-block px-4 py-2 font-medium transition-all duration-300 ease-in-out;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary-light dark:bg-primary-dark transition-all duration-300 ease-in-out rounded-full;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  /* Enhanced mobile nav link styles */
+  .mobile-nav-link {
+    @apply block w-full text-lg py-4 px-5 rounded-2xl transition-all duration-300 ease-in-out;
+  }
+
+  .mobile-nav-link:hover {
+    @apply translate-x-1 bg-white/50 dark:bg-gray-800/50;
+  }
+
+  .mobile-nav-link.active {
+    @apply bg-gradient-to-r from-primary-light/20 to-secondary-light/20 dark:from-primary-dark/20 dark:to-secondary-dark/20 text-primary-light dark:text-primary-dark shadow-sm;
+  }
+
+  /* Enhanced mobile menu with better backdrop */
+  .mobile-menu {
+    @apply fixed inset-0 bg-gradient-to-b from-white/95 to-white/90 dark:from-gray-900/95 dark:to-gray-900/90 backdrop-blur-md z-40 flex flex-col pt-24 pb-8 px-6;
+  }
+
+  /* Navbar animation classes */
+  .navbar-glass {
+    @apply bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-lg;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .navbar-transparent {
+    @apply bg-transparent;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Theme toggle button animation */
+  .theme-toggle {
+    @apply p-2.5 rounded-full shadow-md hover:shadow-lg;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .theme-toggle:hover {
+    transform: scale(1.1) rotate(10deg);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.9) rotate(-10deg);
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+}
+
+/* Animation classes */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animations */
+.stagger-item:nth-child(1) { transition-delay: 0.1s; }
+.stagger-item:nth-child(2) { transition-delay: 0.2s; }
+.stagger-item:nth-child(3) { transition-delay: 0.3s; }
+.stagger-item:nth-child(4) { transition-delay: 0.4s; }
+.stagger-item:nth-child(5) { transition-delay: 0.5s; }
+.stagger-item:nth-child(6) { transition-delay: 0.6s; }

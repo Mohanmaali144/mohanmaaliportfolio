@@ -1,0 +1,207 @@
+interface ContactVariables {
+  name: string;
+  email: string;
+  subject?: string;
+  message: string;
+  phone?: string;
+  [key: string]: any;
+}
+
+export function contact(variables: ContactVariables) {
+  const currentYear = new Date().getFullYear();
+  
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Message from ${variables.name}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: #374151;
+        background-color: #f3f4f6;
+      }
+      
+      .email-container {
+        max-width: 600px;
+        margin: 20px auto;
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      
+      .header {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+      
+      .header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      
+      .header p {
+        margin: 0.5rem 0 0;
+        opacity: 0.9;
+        font-weight: 400;
+      }
+      
+      .content {
+        padding: 2rem;
+      }
+      
+      .message {
+        background-color: #f9fafb;
+        border-left: 4px solid #6366f1;
+        padding: 1.25rem;
+        border-radius: 0 0.5rem 0.5rem 0;
+        margin: 1.5rem 0;
+      }
+      
+      .message p {
+        margin: 0;
+        color: #4b5563;
+        line-height: 1.7;
+        white-space: pre-line;
+      }
+      
+      .details {
+        margin: 2rem 0;
+      }
+      
+      .detail-row {
+        display: flex;
+        margin-bottom: 0.75rem;
+        align-items: flex-start;
+      }
+      
+      .detail-label {
+        font-weight: 600;
+        min-width: 80px;
+        color: #1f2937;
+      }
+      
+      .detail-value {
+        flex: 1;
+        color: #4b5563;
+      }
+      
+      .detail-value a {
+        color: #6366f1;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      
+      .detail-value a:hover {
+        color: #4f46e5;
+        text-decoration: underline;
+      }
+      
+      .footer {
+        background-color: #f9fafb;
+        padding: 1.5rem 2rem;
+        text-align: center;
+        border-top: 1px solid #e5e7eb;
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+      
+      .footer p {
+        margin: 0.5rem 0;
+      }
+      
+      .social-links {
+        margin: 1rem 0;
+      }
+      
+      .social-links a {
+        display: inline-block;
+        margin: 0 0.5rem;
+        color: #6366f1;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      
+      .social-links a:hover {
+        color: #4f46e5;
+        transform: translateY(-1px);
+      }
+      
+      @media (max-width: 600px) {
+        .email-container {
+          margin: 0;
+          border-radius: 0;
+        }
+        
+        .content, .header {
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-container">
+      <div class="header">
+        <h1>New Message from ${variables.name}</h1>
+        <p>${variables.subject || 'Portfolio Inquiry'}</p>
+      </div>
+      
+      <div class="content">
+        <p>Hello,</p>
+        <p>You've received a new message through your portfolio contact form.</p>
+        
+        <div class="message">
+          <p>${variables.message}</p>
+        </div>
+        
+        <div class="details">
+          <div class="detail-row">
+            <div class="detail-label">Name:</div>
+            <div class="detail-value">${variables.name}</div>
+          </div>
+          
+          <div class="detail-row">
+            <div class="detail-label">Email:</div>
+            <div class="detail-value">
+              <a href="mailto:${variables.email}">${variables.email}</a>
+            </div>
+          </div>
+          
+          ${variables.phone ? `
+          <div class="detail-row">
+            <div class="detail-label">Phone:</div>
+            <div class="detail-value">
+              <a href="tel:${variables.phone}">${variables.phone}</a>
+            </div>
+          </div>` : ''}
+        </div>
+        
+        <p>Best regards,<br>Your Portfolio</p>
+      </div>
+      
+      <div class="footer">
+        <div class="social-links">
+          <a href="#" target="_blank">Portfolio</a>
+          <a href="#" target="_blank">GitHub</a>
+          <a href="#" target="_blank">LinkedIn</a>
+          <a href="#" target="_blank">Twitter</a>
+        </div>
+        <p>This email was sent from your portfolio contact form</p>
+        <p>&copy; ${currentYear} Your Name. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+  </html>
+  `;
+}
